@@ -1,3 +1,3 @@
-# chosen1-Compare-with-Pro-module\
+# chosen1-Compare-with-Pro-module
 
 ## INTRO
