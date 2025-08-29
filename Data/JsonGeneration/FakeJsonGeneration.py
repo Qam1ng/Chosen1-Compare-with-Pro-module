@@ -1,4 +1,5 @@
 import json
+import os
 import random
 import uuid
 
@@ -19,7 +20,7 @@ OUTCOME_POOL = ["EnemySpoted", "Death", "EnemyDamaged", "FriendDamaged", "Assist
 def generate_fake_cs_event():
     selected_map = random.choice(MAP_POOL)
     
-    # 生成10个虚拟玩家
+    # 生成10个玩家
     players_list = []
     player_names = [f"Player_{i+1}" for i in range(10)]
     for i in range(10):
@@ -29,10 +30,10 @@ def generate_fake_cs_event():
             "team": random.choice(TEAM_POOL)
         })
 
-    # 随机选择一个玩家作为事件主角
+    # 随机选择玩家作为事件主角
     main_player = random.choice(players_list)
     
-    # 随机选择一个目标玩家
+    # 随机选择目标玩家
     target_player = random.choice([p["name"] for p in players_list if p["name"] != main_player["name"]])
 
     # 创建核心事件
@@ -42,14 +43,14 @@ def generate_fake_cs_event():
         "location": random.choice(LOCATION_POOL.get(selected_map, ["unknown_location"])),
         "result": {
             "outcome": random.sample(OUTCOME_POOL, k=random.randint(1, 2)),
-            "impact": random.sample(IMPACT_POOL, k=random.randint(1, 2)),
+            #"impact": random.sample(IMPACT_POOL, k=random.randint(1, 2)),
             "targets": [target_player],
             "weapon": [random.choice(WEAPON_POOL)],
             "damage": [random.randint(0, 100)]
         }
     }
     
-    # 组装最终的JSON
+    # 组装JSON
     output_json = {
         "match_id": str(uuid.uuid4()), # 使用UUID生成唯一的ID
         "map": selected_map,
@@ -88,6 +89,7 @@ if __name__ == "__main__":
     # 打印格式化的JSON
     print(json.dumps(fake_data, indent=2))
     
+    ######################################################## To be implemented
     # 循环来生成大量文件
     # for i in range(1000):
     #     with open(f'sample_{i+1}.json', 'w') as f:
