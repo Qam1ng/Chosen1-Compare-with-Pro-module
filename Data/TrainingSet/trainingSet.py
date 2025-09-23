@@ -18,6 +18,9 @@ folder = r"C:\\Users\\14799\\Desktop\\demos\\donk_dust2" # <-- demo文件夹
 
 log_file = os.path.join(output_folder, "log.csv")
 
+
+STEP = 60 # 改每秒步频
+
 if not os.path.exists(log_file):
     with open(log_file, mode="w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)
@@ -75,7 +78,7 @@ for filename in os.listdir(folder):
 
             ########################################  Every 60 ticks information ################################################
 
-            STEP = 60
+            
 
             tick_list = []
 
